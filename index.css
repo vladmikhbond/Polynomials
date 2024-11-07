@@ -1,12 +1,31 @@
-body {
-    text-align: center;
+.cont {
+   text-align: center; 
 }
 
 .comamnd-button {
     font:bold;
     font-size: large;
+    margin: 5px;
 }
 
 .input {
-    width: 300px;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: 600;
+    font-size: large;
+    width: 200px;
+    margin: 5px;
+}
+
+#result {
+    /* border: thick black solid ; */
+    border-width: 1px;
+    color: black;
+    font-size:larger;
+
+    padding: 5px;
+    margin: 5px;
+}
+
+.tex {
+    color: blue;
 }

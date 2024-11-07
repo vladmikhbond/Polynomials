@@ -1,25 +1,33 @@
 <!DOCTYPE HTML>
 <html>
-   <head> 
-      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> 
-      <link href="./index.css" rel="stylesheet" /> 
-   </head>
-   <body>
-      <h1>Polynomials</h1>
-      <div>
-          First <input type="text" id="first" class="input" value="2x^2+5x-1"/>
-      </div>
-      <div id="fst">&nbsp;</div>
-      <div>
-          Second <input type="text" id="second" class="input" value="2x^3+5"/>
-      </div>
-      <div id="snd">&nbsp;</div>
-       <div>
-           <input type="button" id="add" class="comamnd-button" value="+" />
-           <input type="button" id="multiply" class="comamnd-button" value="*" />
-       </div>
-      <div id="result"></div>
 
-      <script type="module"  src="./js/controller.js"></script>
-   </body>
+<head>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="./index.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="cont">
+        <h1>Polynomials</h1>
+        <div>
+            <input type="text" id="first" class="input" value="2x^2+5x-1" />
+            <div id="fst" class="tex"></div>
+        </div>
+
+        <div>
+            <input type="text" id="second" class="input" value="2x^3+5" />
+            <div id="snd" class="tex"></div>
+        </div>
+
+        <div>
+            <input type="button" id="add" class="comamnd-button" value="+" />
+            <input type="button" id="multiply" class="comamnd-button" value="*" />
+        </div>
+
+        <div id="result" class="tex" ></div>
+    </div>
+
+    <script type="module" src="./js/controller.js"></script>
+</body>
+
 </html>
