@@ -4,7 +4,7 @@ import Arr from "./arr.js";
 export default class Polynome 
 {
     constructor(text) {
-        this.arr = Convert.toArray(text);
+        this.arr = Convert.toInner(text);
     }
     
     // this += other
@@ -18,7 +18,7 @@ export default class Polynome
     }
     
     toText() {
-        return Convert.toText(this.arr);
+        return Convert.toOuter(this.arr);
     }
 }
 

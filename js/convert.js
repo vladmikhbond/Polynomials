@@ -10,8 +10,8 @@ export default class Convert
     // Переводить багаточлен у внутрішню форму - масив чисел.
     // '2x^2+5x-1' => [-1, 5, 2]
     //
-    static toArray(poly) {
-        let pairs = Convert.poly2monos(poly)
+    static toInner(outer) {
+        let pairs = Convert.poly2monos(outer)
                 .map(mono => Convert.mono2pair(mono));
         pairs.sort((a, b) => a.p - b.p);
         let maxIndex = pairs[pairs.length - 1].p;
@@ -22,7 +22,7 @@ export default class Convert
     }
 
 
-    static toText(inner) {
+    static toOuter(inner) {
         let res = inner.map((m, p) => Convert.pair2mono(m, p)).reverse().join('');
         if (res[0] == '+') res = res.slice(1);
 // console.log(inner, res)                 
