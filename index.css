@@ -1,0 +1,12 @@
+body {
+    text-align: center;
+}
+
+.comamnd-button {
+    font:bold;
+    font-size: large;
+}
+
+.input {
+    width: 300px;
+}
