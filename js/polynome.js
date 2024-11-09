@@ -1,24 +1,24 @@
 import Convert from "./convert.js";
-import Arr from "./arr.js";
+import Operators from "./operators.js";
 
 export default class Polynome 
 {
     constructor(text) {
-        this.arr = Convert.toInner(text);
+        this.arr = Convert.outerToInner(text);
     }
     
     // this += other
     add(other) {
-        this.arr = Arr.plus(this.arr, other.arr);
+        this.arr = Operators.plus(this.arr, other.arr);
     }
 
     // this *= other
     mult(other) {
-        this.arr = Arr.star(this.arr, other.arr);
+        this.arr = Operators.star(this.arr, other.arr);
     }
     
-    toText() {
-        return Convert.toOuter(this.arr);
+    toTex() {
+        return '\\(' + Convert.innerToOuter(this.arr, true) + '\\)';
     }
 }
 

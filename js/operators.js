@@ -1,4 +1,4 @@
-export default class Arr {
+export default class Operators {
     // c = a + b
     static plus(a, b) {
         let c = Object.assign({}, a);
@@ -27,7 +27,7 @@ export default class Arr {
         let c = {};
         for (let key in b) {
             let a1 = this.star1(a, b[key], key)
-            c = Arr.plus(a1, c);
+            c = Operators.plus(a1, c);
             // console.log(1111);
         }
         return c;

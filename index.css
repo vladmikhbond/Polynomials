@@ -9,15 +9,14 @@
 }
 
 .input {
-    font-family:'Courier New', Courier, monospace;
+    font-family: Courier, monospace;
     font-weight: 600;
-    font-size: large;
+    font-size: larger;
     width: 200px;
     margin: 5px;
 }
 
-#result {
-    /* border: thick black solid ; */
+#resultTex {
     border-width: 1px;
     color: black;
     font-size:larger;
