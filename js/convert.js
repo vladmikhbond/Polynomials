@@ -7,25 +7,30 @@
 export default class Convert 
 {
 
-    // Переводить багаточлен у внутрішню форму - масив чисел.
-    // '2x^2+5x-1' => [-1, 5, 2]
+    // Переводить багаточлен у внутрішню форму - словник.
+    // '2x^-2+5x-1' => {"-2":2, "1":5, "0":-1}
     //
     static toInner(outer) {
         let pairs = Convert.poly2monos(outer)
                 .map(mono => Convert.mono2pair(mono));
-        pairs.sort((a, b) => a.p - b.p);
-        let maxIndex = pairs[pairs.length - 1].p;
-
-        let result = new Array(maxIndex + 1).fill(0);
-        pairs.forEach(pair => result[pair.p] += pair.m);
-        return result;
+        const res = {}        
+        for (let pair of pairs) {
+            if (res[pair.p])
+                res[pair.p] += pair.m;
+            else 
+                res[pair.p] = pair.m;
+        }  
+        return res;
     }
 
 
     static toOuter(inner) {
-        let res = inner.map((m, p) => Convert.pair2mono(m, p)).reverse().join('');
-        if (res[0] == '+') res = res.slice(1);
-// console.log(inner, res)                 
+        let keys = Object.keys(inner).sort((a, b) => b - a);
+        let res = '';
+        for (let key of keys) {
+           res = res + Convert.pair2mono(inner[key], key)
+        }
+        if (res[0] == '+') res = res.slice(1);                
         return res;
     }
 
@@ -53,6 +58,9 @@ export default class Convert
         return polyArr;
     }
 
+    
+    // Переводить мантису і порядок  (m, p) у одночлен.
+    // 
     static pair2mono(m, p) {
         if (m === 0) return '';
         if (m > 0) m = '+' + m;
@@ -62,6 +70,7 @@ export default class Convert
         if (p == 1) return `${m}x`;  
         return `${m}x^${p}`
     }
+
 
     // Переводить одночлен у пару чисел {m, p}
     //
@@ -80,6 +89,11 @@ export default class Convert
     }
 
 }
+
+//---------------------- tests ---------------------------
+//console.log(Convert.pair2mono(22, -33));       // '22x^-33'
+
+
 
 //---------------------- tests ---------------------------
 // console.log(Convert.poly2monos('2x^-2+5x-1')); // 2x^-2  +5x   -1
@@ -105,14 +119,14 @@ export default class Convert
 
 
 //---------------------- tests ---------------------------
-console.log(Convert.toInner('2x^-2+5x-1'));
-console.log(Convert.toInner('2x^2+5x-1'));
+// console.log(Convert.toInner('2x^-2+5x-1'));
+// console.log(Convert.toInner('2x^2+5x-1'));
 // console.log(Convert.toInner('4x^5+x^4-2x^3+10x^2+25x+25x-5'));
 // console.log(Convert.toInner('1'));
 // console.log(Convert.toInner('+1'));
 // console.log(Convert.toInner('-1'));
 
-// console.log(Convert.toOuter([-1, 5, 2]));
+// console.log(Convert.toOuter({0: -1, 1: 5, "-2": 2}));
 // console.log(Convert.toOuter([-5, 50, 10, -2, 1, 4]));
 
 
