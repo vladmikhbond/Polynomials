@@ -23,5 +23,5 @@ export default class Arr {
 }
 
 //---------------------- tests ---------------------------
-// console.log(Arr.plus([1,2,3], [1, 1]));
-// console.log(Arr.mult([1,2,3], [1]));  // [1, 3, 5, 3]
+console.log(Arr.plus([1,2,3], [1, 1]));
+console.log(Arr.star([1,2,3], [1]));  // [1, 3, 5, 3]

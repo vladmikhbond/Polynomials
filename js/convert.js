@@ -29,17 +29,6 @@ export default class Convert
         return res;
     }
 
-    static pair2mono(m, p) {
-        if (m === 0) return '';
-        if (m > 0) m = '+' + m;
-        if (m == '+1' && p != 0) m = '+';
-        if (m == '-1' && p != 0) m = '-';
-        if (p == 0) return `${m}`;  
-        if (p == 1) return `${m}x`;  
-        return `${m}x^${p}`
-    }
-
-
     // Розділяє багаточлен на одночлени.
     // '2x^2+5x-1' => ['+2x^2', '+5x', '-1']
     //
@@ -48,8 +37,9 @@ export default class Convert
         
         let polyArr = [];
         let mono = '';
-        for (let char of poly) {
-            if (char == '+' || char == '-') {
+        for (let i = 0; i < poly.length; i++) {
+            let char = poly[i], preChar = poly[i - 1];    
+            if ((char == '+' || char == '-') && preChar != '^') {
                 polyArr.push(mono);
                 mono = char;
             } else {
@@ -61,6 +51,16 @@ export default class Convert
         if (polyArr[0] == '')
             polyArr.shift();
         return polyArr;
+    }
+
+    static pair2mono(m, p) {
+        if (m === 0) return '';
+        if (m > 0) m = '+' + m;
+        if (m == '+1' && p != 0) m = '+';
+        if (m == '-1' && p != 0) m = '-';
+        if (p == 0) return `${m}`;  
+        if (p == 1) return `${m}x`;  
+        return `${m}x^${p}`
     }
 
     // Переводить одночлен у пару чисел {m, p}
@@ -82,6 +82,7 @@ export default class Convert
 }
 
 //---------------------- tests ---------------------------
+// console.log(Convert.poly2monos('2x^-2+5x-1')); // 2x^-2  +5x   -1
 // console.log(Convert.poly2monos('2x^2+5x-1'));  // 2x^2  +5x   -1
 // console.log(Convert.poly2monos('-x^2+5x-1'));  // -x^2  +5x   -1
 // console.log(Convert.poly2monos('3'));          // 3
@@ -99,18 +100,20 @@ export default class Convert
 // console.log(Convert.mono2pair('+22x'));      // {m: 22, p: 1}
 // console.log(Convert.mono2pair('+22x^33'));   // {m: 22, p: 33}
 // console.log(Convert.mono2pair('22x^33'));    // {m: 22, p: 33}
+// console.log(Convert.mono2pair('22x^-33'));    // {m: 22, p: -33}
 
 
 
 //---------------------- tests ---------------------------
-// console.log(Convert.toArray('2x^2+5x-1'));
-// console.log(Convert.toArray('4x^5+x^4-2x^3+10x^2+25x+25x-5'));
-// console.log(Convert.toArray('1'));
-// console.log(Convert.toArray('+1'));
-// console.log(Convert.toArray('-1'));
+console.log(Convert.toInner('2x^-2+5x-1'));
+console.log(Convert.toInner('2x^2+5x-1'));
+// console.log(Convert.toInner('4x^5+x^4-2x^3+10x^2+25x+25x-5'));
+// console.log(Convert.toInner('1'));
+// console.log(Convert.toInner('+1'));
+// console.log(Convert.toInner('-1'));
 
-// console.log(Convert.toText([-1, 5, 2]));
-// console.log(Convert.toText([-5, 50, 10, -2, 1, 4]));
+// console.log(Convert.toOuter([-1, 5, 2]));
+// console.log(Convert.toOuter([-5, 50, 10, -2, 1, 4]));
 
 
 
